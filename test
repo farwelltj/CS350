@@ -1,0 +1,28 @@
+import psycopg2
+
+# Connect to and existing database
+    conn = psycopg2.connect("dbname=test user=postgres")
+
+# Open a cursor to prefrom databse operations
+    cur = conn.cursor()
+
+# Execute a command: this creates a new table
+    cur.execute ("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
+
+# Pass data to fill a query placeholders and let PSycopg perfom 
+# the correct conversion (no more SQL ijections!)
+    curr.execute("INSERT INTO test (num, data) VALUES (%s, %s)", (1oo, "abc'def"))
+  
+# Query the database and obtain data as Python objects
+    cur.execute("Select * FROM test;")
+    cur.fetchone()
+    (1, 100, "abc'def")
+    
+# Make the changes to databse persistent 
+    conn.commit()
+  
+# Close commuications with database
+    cur.close()
+    conn.close()
+    
+    
